@@ -23,4 +23,5 @@ def animate_selected_objects(window):
             cmds.setAttr(obj + ".scaleZ", random.uniform(window.minSZ_spinbox.value(), window.maxSZ_spinbox.value()))
 
             cmds.setKeyframe(obj, time=frame)
+            print("Frame:", frame)
 

@@ -1,8 +1,6 @@
 from maya import cmds
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
-    QCheckBox,
-    QMainWindow,
     QSpinBox,
     QPushButton,
     QVBoxLayout,
@@ -14,6 +12,11 @@ from PySide6.QtWidgets import (
 import maya.OpenMayaUI as omui
 from shiboken6 import wrapInstance
 
+# makes window always stay on top
+def maya_main_window():
+    pointer = omui.MQtUtil.mainWindow()
+    return wrapInstance(int(pointer), QWidget)
+
 # creating a custom spinbox class to set the range of values
 class CustomSpinBox(QSpinBox):
     def __init__(self, parent=None):
@@ -24,9 +27,10 @@ class CustomSpinBox(QSpinBox):
 # creating a custom window class for the animation menu
 class AnimationMenuWindow(QWidget):
     def __init__(self):
-        super().__init__()
+        super().__init__(maya_main_window())
+        self.setWindowFlags(Qt.Window)
         self.setWindowTitle("Animation Generator")
-        self.setFixedWidth(400)
+        self.setFixedWidth(400) # width of the window
         self.build_ui()
 
     def build_ui(self):

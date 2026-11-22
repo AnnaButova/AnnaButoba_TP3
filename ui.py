@@ -11,6 +11,8 @@ from PySide6.QtWidgets import (
     QGroupBox,
     QHBoxLayout
     )
+import maya.OpenMayaUI as omui
+from shiboken6 import wrapInstance
 
 # creating a custom spinbox class to set the range of values
 class CustomSpinBox(QSpinBox):
